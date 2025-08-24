@@ -1,0 +1,3 @@
+const navToggle=document.querySelector('.nav-toggle');const nav=document.querySelector('#menu');const themeBtn=document.querySelector('.theme-toggle');
+if(navToggle&&nav){navToggle.addEventListener('click',()=>{const e='true'===nav.getAttribute('aria-expanded');nav.setAttribute('aria-expanded',String(!e)),navToggle.setAttribute('aria-expanded',String(!e))});nav.querySelectorAll('a').forEach(e=>e.addEventListener('click',()=>{nav.setAttribute('aria-expanded','false'),navToggle.setAttribute('aria-expanded','false')}))}
+themeBtn&&themeBtn.addEventListener('click',()=>{const e='true'===themeBtn.getAttribute('aria-pressed');themeBtn.setAttribute('aria-pressed',String(!e)),document.documentElement.classList.toggle('theme-dark')});

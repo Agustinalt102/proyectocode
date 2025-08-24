@@ -1,0 +1,144 @@
+/* === Base avanzada (Grid + Flexbox + variables + tipografía fluida) === */
+/* styles-advanced.css — Coderhouse entrega (Grid + Flexbox, variables, tipografía fluida, modo oscuro) */
+:root{
+  --bg:#364d98; --surface:#475cb7; --text:#e7eaf6; --muted:#a9b0c7;
+  --primary:#7aa2ff; --accent:#ffd166; --container:1100px;
+  --r:1.2rem; --space-1:.5rem; --space-2:1rem; --space-3:1.5rem; --space-4:2rem; --space-5:3rem;
+  --step--1: clamp(.85rem,.78rem + .3vw,1rem);
+  --step-0: clamp(1rem,.95rem + .4vw,1.125rem);
+  --step-1: clamp(1.25rem,1.1rem + .8vw,1.5rem);
+  --step-2: clamp(1.6rem,1.3rem + 1.4vw,2rem);
+  --step-3: clamp(2rem,1.5rem + 2.4vw,2.6rem);
+}
+@media (prefers-color-scheme: light){
+  :root{ --bg:#f7f8fc; --surface:#fff; --text:#1c1f2b; --muted:#5b6275; --primary:#335dff; --accent:#ff9f1c;}
+}
+*{box-sizing:border-box}
+html{color-scheme:light dark}
+body{margin:0; font: var(--step-0) system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--text);
+     background: radial-gradient(1200px 1200px at 10% -10%, #223 0, transparent 50%),
+                 radial-gradient(800px 800px at 110% 10%, #223 0, transparent 40%), var(--bg);
+     line-height:1.6; overflow-x:hidden;}
+.container{max-width:var(--container); margin-inline:auto; padding-inline:var(--space-2)}
+.grid{display:grid; gap:var(--space-2)}
+.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.features{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--surface); border:1px solid color-mix(in hsl, var(--muted) 15%, transparent); border-radius:var(--r); padding:var(--space-2);}
+.card img{width:100%; height:auto; display:block; border-radius:calc(var(--r) - .25rem)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.7rem 1rem; border-radius:.8rem; background:var(--primary); color:#fff; text-decoration:none; border:1px solid color-mix(in hsl, var(--primary) 60%, transparent)}
+.btn--ghost{background:transparent; color:var(--primary)}
+.header-inner{display:flex; align-items:center; gap:.75rem; padding:.6rem 0}
+.nav-list{list-style:none; margin:0; padding:0; display:grid; grid-template-rows:0fr; transition:grid-template-rows .25s}
+.nav[aria-expanded="true"] .nav-list{grid-template-rows:1fr}
+@media (min-width:800px){ .nav-list{display:flex; grid-template-rows:1fr !important} .nav-toggle{display:none} }
+.table-wrapper{overflow-x:auto}
+table{width:100%; border-collapse:collapse; background:var(--surface); border-radius:var(--r); overflow:hidden}
+th,td{padding:.9rem 1rem; border-bottom:1px solid color-mix(in hsl, var(--muted) 20%, transparent)}
+.theme-dark{ --bg:#0b1020; --surface:#121834; --text:#e7eaf6; --muted:#a9b0c7; --primary:#7aa2ff; --accent:#ffd166; }
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
+
+
+/* === Estilos del proyecto (custom) === */
+/* =============== Tipografía & base =============== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root{
+  --brand-dark:#212529;
+  --brand-primary:#0d6efd;
+  --brand-muted:#6c757d;
+}
+
+html{ scroll-behavior:smooth; }
+html,body{ height:100%; }
+
+body{
+  font-family:'Roboto', sans-serif;
+  color:#212529;
+  background:#f8f9fa;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+main{ flex:1 0 auto; }
+
+img{ max-width:100%; display:block; }
+
+/* Los anclajes (#remeras, etc.) no quedan tapados por la navbar */
+[id]{ scroll-margin-top:80px; }
+
+/* =============== Navbar =============== */
+.navbar-brand{ font-weight:700; letter-spacing:.2px; }
+
+/* =============== Cards / Catálogo =============== */
+.card{
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.card .card-title{ font-weight:600; }
+
+/* Alto consistente para imágenes de cards */
+.card-img-top{
+  height:240px;
+  object-fit:cover;
+}
+@media (max-width:576px){
+  .card-img-top{ height:200px; }
+}
+
+/* Utilidades usadas en imágenes dentro de .ratio */
+.object-fit-cover{ object-fit:cover; }
+.object-fit-contain{ object-fit:contain; background:#fff; }
+
+/* =============== Secciones / layout =============== */
+section + section{ scroll-margin-top:80px; }
+.badge{ letter-spacing:.02em; }
+
+/* =============== Formularios =============== */
+/* IMPORTANTE: No usamos "form { ... }" global para no romper Bootstrap */
+
+/* Formulario clásico SOLO para la página de contacto
+   (usalo si querés estilo de "cajita" tradicional) */
+.formulario-contacto{
+  padding:20px;
+  border:1px solid #dee2e6;
+  background:#fff;
+  border-radius:.5rem;
+  max-width:520px;
+  margin:20px auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+@media (max-width:768px){
+  .formulario-contacto{ width:92%; }
+}
+
+/* Blindajes para los formularios de filtros/newsletter/contacto
+   (evitan que alguna regla vieja los deforme) */
+#acc-filters,
+#prod-filters,
+#news-form,
+#contact-form{
+  border:0 !important;
+  padding:0 !important;
+  width:auto !important;
+  margin:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  display:block !important;
+}
+
+/* Newsletter dentro de bloque oscuro */
+#suscripcion .form-control{ border:none; }
+#suscripcion .form-control:focus{ box-shadow:none; }
+
+/* =============== Footer =============== */
+footer{ background:#212529; color:#fff; }
+footer .text-secondary{ color:rgba(255,255,255,.6) !important; }
+footer a{ color:#fff; text-decoration:underline; }
+footer a:hover{ color:#e2e6ea; }
+
+
